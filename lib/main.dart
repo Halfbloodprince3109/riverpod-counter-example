@@ -2,48 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod/riverpod.dart';
 import './counter_provider.dart';
+import './score.dart';
+
+class Counter extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final count = ref.watch(counterProvider);
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        //  Text('Count: $count'),
+        ElevatedButton(
+            onPressed: () {
+              ref.read(counterProvider.notifier).increment();
+            },
+            child: Text('Increment')),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Score()),
+            );
+          },
+          child: Text('View Score'),
+        ),
+      ],
+    );
+  }
+}
 
 void main() {
   runApp(
-    const ProviderScope(child: MyApp()),
+    ProviderScope(
+      child: MaterialApp(
+        title: 'Counter App',
+        home: Counter(),
+      ),
+    ),
   );
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(home: Home());
-  }
-}
-
-final counterProvider = StateProvider((ref) => 0);
-
-class Home extends ConsumerWidget {
-  const Home({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          ' Riverpod Counter example',
-          textAlign: TextAlign.center,
-        ),
-      ),
-      body: Center(
-        child: Consumer(
-          builder: (context, ref, _) {
-            final count = ref.watch(counterProvider);
-            return Text('$count');
-          },
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => ref.read(counterProvider.notifier).state++,
-        child: const Icon(Icons.add),
-      ),
-    );
-  }
 }

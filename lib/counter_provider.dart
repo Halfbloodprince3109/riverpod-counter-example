@@ -9,4 +9,3 @@ class CounterController extends StateNotifier<int> {
     state++;
   }
 }
-  
