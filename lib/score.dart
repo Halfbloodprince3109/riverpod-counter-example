@@ -47,35 +47,3 @@ class Score extends StatelessWidget {
     );
   }
 }
-
-// class Score extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Score'),
-//       ),
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             Consumer(builder: (context, watch, _) {
-//               final count = watch(counterStateProvider.state);
-//               return Text(
-//                 'Score: $count',
-//                 style: TextStyle(fontSize: 50),
-//               );
-//             }),
-//             SizedBox(height: 20),
-//             ElevatedButton(
-//               onPressed: () {
-//                 Navigator.pop(context);
-//               },
-//               child: Text('Go Back'),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
